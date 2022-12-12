@@ -1,29 +1,20 @@
-﻿using System;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
-  class AOC2022
+  public class AOC2022
   {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-      // read the lines of /inputs/day1.txt into a list
-      var lines = System.IO.File.ReadAllLines(@"/inputs/day1.txt");
-
-      // initialize an empty list
-      var elves = new List<int>();
-
-      int i = 0;
-      foreach (var line in lines)
+      Console.WriteLine("Enter a number to run the corresponding day's code");
+      int day = Convert.ToInt32(Console.ReadLine());
+      switch (day)
       {
-        if (line == "")
-          i++;
-        else
-          elves[i] += int.Parse(line);
-      }
-
-      foreach (var elf in elves)
-      {
-        Console.WriteLine(elf);
+        case 1:
+          var result = Day1.Run();
+          Console.WriteLine($"The answer is {result}");
+          break;
+        default:
+          Console.WriteLine("Invalid day");
+          break;
       }
     }
   }
