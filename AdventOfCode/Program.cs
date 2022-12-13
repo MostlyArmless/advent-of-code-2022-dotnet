@@ -21,7 +21,15 @@
 
       var dataProvider = new RealProblemDataProvider(dayNumber);
       var problemSolver = Activator.CreateInstance(Type.GetType($"AdventOfCode.Day{dayNumber}")!, dataProvider);
-      var result = problemSolver?.GetType()?.GetMethod($"RunPart{partNumber}")?.Invoke(problemSolver, null);
+      var runner = problemSolver?.GetType()?.GetMethod($"RunPart{partNumber}");
+
+      // Time the execution of the Invoke method
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+      var result = runner?.Invoke(problemSolver, null);
+      stopwatch.Stop();
+      Console.WriteLine($"Execution time: {stopwatch.ElapsedMilliseconds}ms");
+
       Console.WriteLine($"The answer to day {dayNumber} is: {result}");
     }
   }
