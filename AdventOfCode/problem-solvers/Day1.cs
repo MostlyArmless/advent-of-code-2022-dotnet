@@ -1,9 +1,15 @@
 namespace AdventOfCode;
-public class Day1
+public class Day1 : ProblemSolver
 {
-  public static int Run()
+  private IDataProvider _dataProvider;
+  public Day1(IDataProvider dataProvider)
   {
-    var input = File.ReadAllText(@"./inputs/day1.txt");
+    _dataProvider = dataProvider;
+  }
+
+  public int Run()
+  {
+    var input = _dataProvider.GetInputData();
     var elves = CalculateCaloriesPerElf(input);
 
     foreach (var elf in elves)
@@ -14,7 +20,7 @@ public class Day1
     return GetTotalCaloriesOfElfCarryTheMostCalories(elves);
   }
 
-  public static int[] CalculateCaloriesPerElf(string inputData)
+  private int[] CalculateCaloriesPerElf(string inputData)
   {
     var lines = inputData.Split(Environment.NewLine);
     var elves = new List<int>() { 0 };
@@ -34,7 +40,7 @@ public class Day1
     return elves.ToArray();
   }
 
-  public static int GetTotalCaloriesOfElfCarryTheMostCalories(int[] elves)
+  private int GetTotalCaloriesOfElfCarryTheMostCalories(int[] elves)
   {
     return elves.Max();
   }
