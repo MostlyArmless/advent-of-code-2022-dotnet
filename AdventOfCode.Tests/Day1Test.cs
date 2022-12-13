@@ -3,9 +3,7 @@ using Moq;
 
 public class Day1Test
 {
-  public static IEnumerable<object[]> TestData => new List<object[]>
-  {
-    new object[] { @"1000
+  private const string sampleInput = @"1000
 2000
 3000
 
@@ -18,7 +16,10 @@ public class Day1Test
 8000
 9000
 
-10000", 24000 },
+10000";
+  public static IEnumerable<object[]> TestData => new List<object[]>
+  {
+    new object[] { sampleInput , 24000 },
     new object[] {
         File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), @"./inputs/day1.txt")),
         69795
@@ -28,13 +29,24 @@ public class Day1Test
 
   [Theory]
   [MemberData(nameof(TestData))]
-  public void TestCalorieCounter(string inputString, int expectedCaloriesOfElfCarryingTheMostCalories)
+  public void TestGetTopElfCalories(string inputString, int expectedCaloriesOfElfCarryingTheMostCalories)
   {
     var mockDataProvider = new Mock<IDataProvider>();
     mockDataProvider.Setup(x => x.GetInputData()).Returns(inputString);
     var day1 = new Day1(mockDataProvider.Object);
-    var maxElfCalories = day1.Run();
+    var maxElfCalories = day1.RunPart1();
 
     Assert.Equal(expectedCaloriesOfElfCarryingTheMostCalories, maxElfCalories);
+  }
+
+  [Fact]
+  public void TestGetTopNElvesCalories()
+  {
+    var mockDataProvider = new Mock<IDataProvider>();
+    mockDataProvider.Setup(x => x.GetInputData()).Returns(sampleInput);
+    var day1 = new Day1(mockDataProvider.Object);
+    var maxElfCalories = day1.RunPart2();
+
+    Assert.Equal(45e3, maxElfCalories);
   }
 }

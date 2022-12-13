@@ -2,7 +2,7 @@
 I'm using this as an opportunity to practice C# using .NET 7.0 to solve the AOC 2022 problems
 
 # Dev Instructions
-`dotnet run --project ./AdventOfCode/` to run, enter the problem number when prompted
+`dotnet run --project ./AdventOfCode/` to run, enter the problem number and part number when prompted, or to run programmatically you can just `dotnet run --project ./AdventOfCode 1 2` e.g. to run Day 1 part 2
 
 `dotnet watch test --project ./AdventOfCode.Tests/` while developing to run the tests with a watch
 

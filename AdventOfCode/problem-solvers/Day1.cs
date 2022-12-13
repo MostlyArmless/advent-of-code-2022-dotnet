@@ -2,22 +2,26 @@ namespace AdventOfCode;
 public class Day1 : ProblemSolver
 {
   private IDataProvider _dataProvider;
-  public Day1(IDataProvider dataProvider)
+  private string? _input;
+  private int[]? _elves;
+
+  public Day1(IDataProvider dataProvider) => _dataProvider = dataProvider;
+
+  public int RunPart1()
   {
-    _dataProvider = dataProvider;
+    _input = _input ?? _dataProvider.GetInputData();
+    _elves = _elves ?? CalculateCaloriesPerElf(_input);
+
+    return GetTotalCaloriesOfElfCarryTheMostCalories(_elves);
   }
 
-  public int Run()
+  public int RunPart2()
   {
-    var input = _dataProvider.GetInputData();
-    var elves = CalculateCaloriesPerElf(input);
+    _input = _input ?? _dataProvider.GetInputData();
+    _elves = _elves ?? CalculateCaloriesPerElf(_input);
 
-    foreach (var elf in elves)
-    {
-      Console.WriteLine(elf);
-    }
-
-    return GetTotalCaloriesOfElfCarryTheMostCalories(elves);
+    // return the sum of the top numElves elves
+    return _elves.OrderByDescending(x => x).Take(3).Sum();
   }
 
   private int[] CalculateCaloriesPerElf(string inputData)

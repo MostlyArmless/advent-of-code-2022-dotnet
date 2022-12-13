@@ -7,9 +7,11 @@
     {
       // See if there was a day number passed in
       int dayNumber = 0;
-      if (args.Length > 0)
+      int partNumber = 0;
+      if (args.Length == 2)
       {
         dayNumber = Convert.ToInt32(args[0]);
+        partNumber = Convert.ToInt32(args[1]);
       }
       else
       {
@@ -19,7 +21,7 @@
 
       var dataProvider = new RealProblemDataProvider(dayNumber);
       var problemSolver = Activator.CreateInstance(Type.GetType($"AdventOfCode.Day{dayNumber}")!, dataProvider);
-      var result = problemSolver?.GetType()?.GetMethod("Run")?.Invoke(problemSolver, null);
+      var result = problemSolver?.GetType()?.GetMethod($"RunPart{partNumber}")?.Invoke(problemSolver, null);
       Console.WriteLine($"The answer to day {dayNumber} is: {result}");
     }
   }

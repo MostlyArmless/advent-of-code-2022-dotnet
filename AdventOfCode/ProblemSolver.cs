@@ -1,4 +1,5 @@
 public interface ProblemSolver
 {
-  public int Run();
+  public int RunPart1();
+  public int RunPart2();
 }
