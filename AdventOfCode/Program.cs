@@ -18,9 +18,11 @@
         Console.WriteLine("Enter a number to run the corresponding day's code");
         dayNumber = Convert.ToInt32(Console.ReadLine());
       }
+      Console.WriteLine($"Running day {dayNumber} part {partNumber}...");
 
       var dataProvider = new RealProblemDataProvider(dayNumber);
-      var problemSolver = Activator.CreateInstance(Type.GetType($"AdventOfCode.Day{dayNumber}")!, dataProvider);
+      var problemSolverType = Type.GetType($"AdventOfCode.Day{dayNumber}");
+      var problemSolver = Activator.CreateInstance(problemSolverType!, dataProvider);
       var runner = problemSolver?.GetType()?.GetMethod($"RunPart{partNumber}");
 
       // Time the execution of the Invoke method
