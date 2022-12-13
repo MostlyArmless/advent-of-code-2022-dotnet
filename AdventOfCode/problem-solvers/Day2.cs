@@ -3,6 +3,7 @@ namespace AdventOfCode
   public class Day2 : ProblemSolver
   {
     public enum Shape { Rock, Paper, Scissors };
+    public enum Result { Win, Draw, Lose };
     private IDataProvider _dataProvider;
     private string? _input;
     public Day2(IDataProvider dataProvider) => _dataProvider = dataProvider;
@@ -29,7 +30,23 @@ namespace AdventOfCode
 
     public int RunPart2()
     {
-      throw new NotImplementedException();
+      _input = _input ?? _dataProvider.GetInputData();
+
+      var rounds = _input
+        .Split(Environment.NewLine)
+        .Select(x => x.Split(" "))
+        .ToArray();
+
+      int score = 0;
+      foreach (var round in rounds)
+      {
+        Shape theirMove = ParseMove(round[0]);
+        Result desiredResult = ParseDesiredResult(round[1]);
+        Shape myMove = CalculateMove(theirMove, desiredResult);
+        score += GetScoreFromShape(myMove) + GetScoreFromLoseDrawWin(theirMove, myMove);
+      }
+
+      return score;
     }
 
     public bool DoIWin(Shape theirMove, Shape myMove)
@@ -55,6 +72,38 @@ namespace AdventOfCode
         "C" => Shape.Scissors,
         _ => throw new Exception($"Invalid move '{move}'")
       };
+    }
+
+    private Result ParseDesiredResult(string move)
+    {
+      return (move) switch
+      {
+        "X" => Result.Lose,
+        "Y" => Result.Draw,
+        "Z" => Result.Win,
+        _ => throw new Exception($"Invalid move '{move}'")
+      };
+    }
+
+    private Shape CalculateMove(Shape theirMove, Result desiredResult)
+    {
+      return desiredResult == Result.Draw
+        ? theirMove
+        : desiredResult == Result.Win
+          ? (theirMove) switch
+          {
+            Shape.Rock => Shape.Paper,
+            Shape.Paper => Shape.Scissors,
+            Shape.Scissors => Shape.Rock,
+            _ => throw new Exception($"Invalid move '{theirMove}'")
+          }
+          : (theirMove) switch // Lose
+          {
+            Shape.Rock => Shape.Scissors,
+            Shape.Paper => Shape.Rock,
+            Shape.Scissors => Shape.Paper,
+            _ => throw new Exception($"Invalid move '{theirMove}'")
+          };
     }
 
     private int GetScoreFromShape(Shape move)

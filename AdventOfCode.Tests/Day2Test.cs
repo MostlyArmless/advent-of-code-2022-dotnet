@@ -1,6 +1,4 @@
-using System;
 using Moq;
-using Xunit;
 
 namespace AdventOfCode.Tests
 {
@@ -18,6 +16,16 @@ C Z";
       var solver = new Day2(mockDataProvider.Object);
       var result = solver.RunPart1();
       Assert.Equal(15, result);
+    }
+
+    [Fact]
+    public void TestDay2Part2()
+    {
+      var mockDataProvider = new Mock<IDataProvider>();
+      mockDataProvider.Setup(x => x.GetInputData()).Returns(sampleInput);
+      var solver = new Day2(mockDataProvider.Object);
+      var result = solver.RunPart2();
+      Assert.Equal(12, result);
     }
   }
 }

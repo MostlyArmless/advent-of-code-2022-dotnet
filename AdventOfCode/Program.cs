@@ -21,8 +21,7 @@
       Console.WriteLine($"Running day {dayNumber} part {partNumber}...");
 
       var dataProvider = new RealProblemDataProvider(dayNumber);
-      var problemSolverType = Type.GetType($"AdventOfCode.Day{dayNumber}");
-      var problemSolver = Activator.CreateInstance(problemSolverType!, dataProvider);
+      var problemSolver = Activator.CreateInstance(Type.GetType($"AdventOfCode.Day{dayNumber}")!, dataProvider);
       var runner = problemSolver?.GetType()?.GetMethod($"RunPart{partNumber}");
 
       // Time the execution of the Invoke method
