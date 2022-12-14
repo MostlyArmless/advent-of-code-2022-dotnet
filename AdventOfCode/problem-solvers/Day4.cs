@@ -33,7 +33,29 @@ namespace AdventOfCode
 
     public int RunPart2()
     {
-      throw new NotImplementedException();
+      // Find ranges that overlap AT ALL, rather than being fully contained
+      _input = _input ?? _dataProvider.GetInputData();
+      var pairs = _input // string
+        .Split(Environment.NewLine) // string[] (lines)
+        .Select(line => line.Split(',')); // string[][] (pairs)
+
+      int numOverlapping = 0;
+      foreach (var pair in pairs)
+      {
+        // find cases where each elf in the pair overlaps at all
+        int elfAMin = int.Parse(pair[0].Split('-')[0]);
+        int elfAMax = int.Parse(pair[0].Split('-')[1]);
+        int elfBMin = int.Parse(pair[1].Split('-')[0]);
+        int elfBMax = int.Parse(pair[1].Split('-')[1]);
+        bool areRangesSeparate =
+          elfAMax < elfBMin
+          || elfBMax < elfAMin;
+
+        if (!areRangesSeparate)
+          numOverlapping++;
+      }
+
+      return numOverlapping;
     }
   }
 }

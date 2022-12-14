@@ -30,7 +30,7 @@ namespace AdventOfCode.Tests
     {
       var solver = new Day4(_mockDataProvider.Object);
       var result = solver.RunPart2();
-      Assert.Equal(42, result);
+      Assert.Equal(4, result);
     }
   }
 }
