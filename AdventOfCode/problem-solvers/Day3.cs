@@ -61,7 +61,35 @@ namespace AdventOfCode
 
     public int RunPart2()
     {
-      throw new NotImplementedException();
+      // Each group of 3 lines indicates a group of 3 rucksacks.
+      // Find the letter that is common to all 3 rucksacks in each group.
+      _input = _input ?? _dataProvider.GetInputData();
+
+      string[][] groups = _input
+        .Split(Environment.NewLine)
+        .Select((r, i) => new { Index = i, Value = r })
+        .GroupBy(x => x.Index / 3)
+        .Select(g => g.Select(x => x.Value).ToArray())
+        .ToArray();
+
+      int sumOfPrioritiesPerGroup = 0;
+      foreach (var group in groups)
+      {
+        var rucksack1 = group[0];
+        var rucksack2 = group[1];
+        var rucksack3 = group[2];
+
+        // Find which letter appears in all 3 rucksacks
+        // Find the priority of that letter
+        char commonLetter = rucksack1
+          .Where(c => rucksack2.Contains(c) && rucksack3.Contains(c))
+          .Distinct()
+          .ToArray()[0];
+
+        var priority = GetPriority(commonLetter);
+        sumOfPrioritiesPerGroup += priority;
+      }
+      return sumOfPrioritiesPerGroup;
     }
   }
 }
