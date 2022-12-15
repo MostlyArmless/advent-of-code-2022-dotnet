@@ -33,7 +33,7 @@ move 1 from 1 to 2";
     {
       var solver = new Day5(_mockDataProvider.Object);
       var result = solver.RunPart2().ResultAsString;
-      Assert.Equal("stuff", result);
+      Assert.Equal("MCD", result);
     }
   }
 }
