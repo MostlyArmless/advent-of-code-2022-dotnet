@@ -8,7 +8,7 @@ namespace AdventOfCode
     private string? _input;
     public Day2(IDataProvider dataProvider) => _dataProvider = dataProvider;
 
-    public int RunPart1()
+    public ProblemResult RunPart1()
     {
       _input = _input ?? _dataProvider.GetInputData();
 
@@ -25,10 +25,10 @@ namespace AdventOfCode
         score += GetScoreFromShape(myMove) + GetScoreFromLoseDrawWin(theirMove, myMove);
       }
 
-      return score;
+      return new ProblemResult() { ResultAsInt = score };
     }
 
-    public int RunPart2()
+    public ProblemResult RunPart2()
     {
       _input = _input ?? _dataProvider.GetInputData();
 
@@ -46,7 +46,7 @@ namespace AdventOfCode
         score += GetScoreFromShape(myMove) + GetScoreFromLoseDrawWin(theirMove, myMove);
       }
 
-      return score;
+      return new ProblemResult() { ResultAsInt = score };
     }
 
     public bool DoIWin(Shape theirMove, Shape myMove)

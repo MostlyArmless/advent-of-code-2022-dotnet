@@ -6,7 +6,7 @@ namespace AdventOfCode
     private string? _input;
     public Day3(IDataProvider dataProvider) => _dataProvider = dataProvider;
 
-    public int RunPart1()
+    public ProblemResult RunPart1()
     {
       // Goal: find the item type which appears in both compartments of each rucksack.
       // What is the sum of the priorities of those item types?
@@ -38,7 +38,7 @@ namespace AdventOfCode
         sumOfCommonLetterPriorities += priority;
       }
 
-      return sumOfCommonLetterPriorities;
+      return new ProblemResult() { ResultAsInt = sumOfCommonLetterPriorities };
     }
 
     private int GetPriority(char letter)
@@ -59,7 +59,7 @@ namespace AdventOfCode
       }
     }
 
-    public int RunPart2()
+    public ProblemResult RunPart2()
     {
       // Each group of 3 lines indicates a group of 3 rucksacks.
       // Find the letter that is common to all 3 rucksacks in each group.
@@ -89,7 +89,7 @@ namespace AdventOfCode
         var priority = GetPriority(commonLetter);
         sumOfPrioritiesPerGroup += priority;
       }
-      return sumOfPrioritiesPerGroup;
+      return new ProblemResult() { ResultAsInt = sumOfPrioritiesPerGroup };
     }
   }
 }

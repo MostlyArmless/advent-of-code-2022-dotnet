@@ -21,7 +21,7 @@ namespace AdventOfCode.Tests
     public void TestDay4Part1()
     {
       var solver = new Day4(_mockDataProvider.Object);
-      var result = solver.RunPart1();
+      var result = solver.RunPart1().ResultAsInt;
       Assert.Equal(2, result);
     }
 
@@ -29,7 +29,7 @@ namespace AdventOfCode.Tests
     public void TestDay4Part2()
     {
       var solver = new Day4(_mockDataProvider.Object);
-      var result = solver.RunPart2();
+      var result = solver.RunPart2().ResultAsInt;
       Assert.Equal(4, result);
     }
   }

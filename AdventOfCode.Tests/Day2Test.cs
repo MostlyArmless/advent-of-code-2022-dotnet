@@ -14,7 +14,7 @@ C Z";
       var mockDataProvider = new Mock<IDataProvider>();
       mockDataProvider.Setup(x => x.GetInputData()).Returns(sampleInput);
       var solver = new Day2(mockDataProvider.Object);
-      var result = solver.RunPart1();
+      var result = solver.RunPart1().ResultAsInt;
       Assert.Equal(15, result);
     }
 
@@ -24,7 +24,7 @@ C Z";
       var mockDataProvider = new Mock<IDataProvider>();
       mockDataProvider.Setup(x => x.GetInputData()).Returns(sampleInput);
       var solver = new Day2(mockDataProvider.Object);
-      var result = solver.RunPart2();
+      var result = solver.RunPart2().ResultAsInt;
       Assert.Equal(12, result);
     }
   }

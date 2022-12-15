@@ -26,7 +26,7 @@ CrZsJsPPZsGzwwsLwLmpwMDw";
     public void TestDay3Part1()
     {
       var solver = new Day3(_mockDataProvider.Object);
-      var result = solver.RunPart1();
+      var result = solver.RunPart1().ResultAsInt;
       Assert.Equal(157, result);
     }
 
@@ -34,7 +34,7 @@ CrZsJsPPZsGzwwsLwLmpwMDw";
     public void TestDay3Part2()
     {
       var solver = new Day3(_mockDataProvider.Object);
-      var result = solver.RunPart2();
+      var result = solver.RunPart2().ResultAsInt;
       Assert.Equal(70, result);
     }
   }

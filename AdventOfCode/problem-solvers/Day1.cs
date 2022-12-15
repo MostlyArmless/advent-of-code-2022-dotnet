@@ -7,21 +7,21 @@ public class Day1 : ProblemSolver
 
   public Day1(IDataProvider dataProvider) => _dataProvider = dataProvider;
 
-  public int RunPart1()
+  public ProblemResult RunPart1()
   {
     _input = _input ?? _dataProvider.GetInputData();
     _elves = _elves ?? CalculateCaloriesPerElf(_input);
 
-    return GetTotalCaloriesOfElfCarryTheMostCalories(_elves);
+    return new ProblemResult() { ResultAsInt = GetTotalCaloriesOfElfCarryTheMostCalories(_elves) };
   }
 
-  public int RunPart2()
+  public ProblemResult RunPart2()
   {
     _input = _input ?? _dataProvider.GetInputData();
     _elves = _elves ?? CalculateCaloriesPerElf(_input);
 
     // return the sum of the top numElves elves
-    return _elves.OrderByDescending(x => x).Take(3).Sum();
+    return new ProblemResult() { ResultAsInt = _elves.OrderByDescending(x => x).Take(3).Sum() };
   }
 
   private int[] CalculateCaloriesPerElf(string inputData)

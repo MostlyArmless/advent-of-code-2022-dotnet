@@ -34,7 +34,7 @@ public class Day1Test
     var mockDataProvider = new Mock<IDataProvider>();
     mockDataProvider.Setup(x => x.GetInputData()).Returns(inputString);
     var day1 = new Day1(mockDataProvider.Object);
-    var maxElfCalories = day1.RunPart1();
+    var maxElfCalories = day1.RunPart1().ResultAsInt;
 
     Assert.Equal(expectedCaloriesOfElfCarryingTheMostCalories, maxElfCalories);
   }
@@ -45,7 +45,7 @@ public class Day1Test
     var mockDataProvider = new Mock<IDataProvider>();
     mockDataProvider.Setup(x => x.GetInputData()).Returns(sampleInput);
     var day1 = new Day1(mockDataProvider.Object);
-    var maxElfCalories = day1.RunPart2();
+    var maxElfCalories = day1.RunPart2().ResultAsInt;
 
     Assert.Equal(45e3, maxElfCalories);
   }

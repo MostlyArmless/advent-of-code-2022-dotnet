@@ -6,7 +6,7 @@ namespace AdventOfCode
     private string? _input;
     public Day4(IDataProvider dataProvider) => _dataProvider = dataProvider;
 
-    public int RunPart1()
+    public ProblemResult RunPart1()
     {
       _input = _input ?? _dataProvider.GetInputData();
       var pairs = _input // string
@@ -28,10 +28,10 @@ namespace AdventOfCode
           numFullyContained++;
       }
 
-      return numFullyContained;
+      return new ProblemResult() { ResultAsInt = numFullyContained };
     }
 
-    public int RunPart2()
+    public ProblemResult RunPart2()
     {
       // Find ranges that overlap AT ALL, rather than being fully contained
       _input = _input ?? _dataProvider.GetInputData();
@@ -55,7 +55,7 @@ namespace AdventOfCode
           numOverlapping++;
       }
 
-      return numOverlapping;
+      return new ProblemResult() { ResultAsInt = numOverlapping };
     }
   }
 }

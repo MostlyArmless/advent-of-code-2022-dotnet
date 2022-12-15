@@ -27,11 +27,11 @@
       // Time the execution of the Invoke method
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
-      var result = runner?.Invoke(problemSolver, null);
+      var result = (ProblemResult)runner?.Invoke(problemSolver, null);
       stopwatch.Stop();
       Console.WriteLine($"Execution time: {stopwatch.ElapsedMilliseconds}ms");
 
-      Console.WriteLine($"The answer to day {dayNumber} is: {result}");
+      Console.WriteLine($"The answer to day {dayNumber} is: {result.ResultAsString}");
     }
   }
 }
