@@ -9,31 +9,39 @@ namespace AdventOfCode
     public ProblemResult RunPart1()
     {
       _input = _input ?? _dataProvider.GetInputData();
+      int numCharsProcessed = FindPositionOfUniqueNCharSubstring(4);
+      return new ProblemResult() { ResultAsInt = numCharsProcessed };
+    }
 
-      // Need to find the first place where 4 unique characters appear in a row
-      var q = new Queue<char>(4);
+    public ProblemResult RunPart2()
+    {
+      _input = _input ?? _dataProvider.GetInputData();
+      int numCharsProcessed = FindPositionOfUniqueNCharSubstring(14);
+      return new ProblemResult() { ResultAsInt = numCharsProcessed };
+    }
+
+    private int FindPositionOfUniqueNCharSubstring(int numConsecutiveUniqueChars)
+    {
+      // Need to find the first place where numConsecutiveUniqueChars unique characters appear in a row
+      var q = new Queue<char>(numConsecutiveUniqueChars);
       int numCharsProcessed = 0;
-      for (int i = 0; i < _input.Length; i++)
+      for (int i = 0; i < _input?.Length; i++)
       {
         q.Enqueue(_input[i]);
-        if (q.Count == 5)
+        if (q.Count == numConsecutiveUniqueChars + 1)
           q.Dequeue();
 
         numCharsProcessed++;
-        if (numCharsProcessed >= 4 && AllCharactersInQueueAreUnique(q))
+        if (numCharsProcessed >= numConsecutiveUniqueChars && AllCharactersInQueueAreUnique(q))
           break;
       }
-      return new ProblemResult() { ResultAsInt = numCharsProcessed };
+
+      return numCharsProcessed;
     }
 
     private bool AllCharactersInQueueAreUnique(Queue<char> q)
     {
       return q.Count == q.Distinct().Count();
-    }
-
-    public ProblemResult RunPart2()
-    {
-      throw new NotImplementedException();
     }
   }
 }

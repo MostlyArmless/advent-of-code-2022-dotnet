@@ -24,12 +24,18 @@ namespace AdventOfCode.Tests
       Assert.Equal(expectedMarkerPosition, result);
     }
 
-    [Fact]
-    public void TestDay6Part2()
+    [Theory]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", 23)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
+    public void TestDay6Part2(string input, int expectedMarkerPosition)
     {
+      _mockDataProvider.Setup(x => x.GetInputData()).Returns(input);
       var solver = new Day6(_mockDataProvider.Object);
       var result = solver.RunPart2().ResultAsInt;
-      Assert.Equal(42, result);
+      Assert.Equal(expectedMarkerPosition, result);
     }
   }
 }
